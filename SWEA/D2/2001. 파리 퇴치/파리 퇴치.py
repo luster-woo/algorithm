@@ -11,6 +11,6 @@ for seq in range(1, num + 1):
                 for j in range(ans):
                     sum_val += arr[x + i][y + j]
             if sum_val>max_val:
-            	max_val =sum_val
+            	max_val = sum_val
 
     print(f'#{seq} {max_val}')
