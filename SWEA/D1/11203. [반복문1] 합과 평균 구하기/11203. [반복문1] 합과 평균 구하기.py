@@ -4,11 +4,11 @@ def round_1(a):
         b = a%10
         a-=b
         a+=10
-        return a/1000
+        return a/100
     else:
         b = a % 10
         a -= b
-        return a/1000
+        return a/100
 
 
 num = int(input())
