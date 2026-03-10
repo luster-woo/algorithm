@@ -6,17 +6,24 @@ def check(row):
         return
     
     for col in range(n):
-        path[row] = col
-        
-        for i in range(row):
-            if path[i] == path[row] or abs(path[row]-path[i]) == row-i:
-                break
-        else:
+        if not col_v[col] and not diag1[row+col] and not diag2[row-col+n]:
+            col_v[col] = 1
+            diag1[row+col] = 1
+            diag2[row-col+n] = 1
+            
             check(row+1)
+            
+            col_v[col] = 0
+            diag1[row+col] = 0
+            diag2[row-col+n] = 0
 
 n = int(input())
-path = [0]*n
-cnt = 0
 
+col_v = [0]*n
+diag1 = [0]*(2*n)
+diag2 = [0]*(2*n)
+
+cnt = 0
 check(0)
+
 print(cnt)
