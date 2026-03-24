@@ -1,42 +1,35 @@
 import sys
-from collections import deque
 input = sys.stdin.readline
+from itertools import combinations
+from collections import deque
 
-dx = [0, 1, 0, -1]
-dy = [1, 0, -1, 0]
+arr = [list(input().strip()) for _ in range(5)]
+coords = [(i, j) for i in range(5) for j in range(5)]
 
-def bfs(q, visited, lev, cnt):
+def is_connected(comb):
+    q = deque([comb[0]])
+    visited = set([comb[0]])
+    comb_set = set(comb)
 
-    if 7-lev+cnt < 4:
-        return
+    while q:
+        x, y = q.popleft()
+        for dx, dy in [(0,1),(1,0),(0,-1),(-1,0)]:
+            nx, ny = x+dx, y+dy
+            if (nx, ny) in comb_set and (nx, ny) not in visited:
+                visited.add((nx, ny))
+                q.append((nx, ny))
 
-    if lev == 7:
-        if cnt >= 4:
-            q_tuple = tuple(sorted(q, key=lambda t: (t[0], t[1])))
-            temp.add(q_tuple)
-        return
+    return len(visited) == 7
 
-    q_list = list(q)
-    for a, b in q_list:
-        for i in range(4):
-            ni = a + dx[i]
-            nj = b + dy[i]
-            if 0 <= ni < 5 and 0 <= nj < 5 and not visited[ni][nj]:
-                visited[ni][nj] = 1
-                q.append((ni, nj))
-                bfs(q, visited, lev + 1, cnt + (1 if maze[ni][nj]=="S" else 0))
-                visited[ni][nj] = 0
-                q.pop()
+answer = 0
 
-maze = [list(input().strip()) for _ in range(5)]
+for comb in combinations(coords, 7):
+    s_cnt = sum(1 for x, y in comb if arr[x][y] == 'S')
+    if s_cnt < 4:
+        continue
 
-temp = set()
 
-for x in range(5):
-    for y in range(5):
-        visited = [[0]*5 for _ in range(5)]
-        visited[x][y] = 1
-        cnt = 1 if maze[x][y] == "S" else 0
-        bfs(deque([(x, y)]), visited, 1, cnt)
+    if is_connected(comb):
+        answer += 1
 
-print(len(temp))
+print(answer)
