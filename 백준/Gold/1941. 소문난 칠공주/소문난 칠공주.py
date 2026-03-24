@@ -1,12 +1,15 @@
 import sys
 from collections import deque
-
 input = sys.stdin.readline
 
 dx = [0, 1, 0, -1]
 dy = [1, 0, -1, 0]
 
 def bfs(q, visited, lev, cnt):
+
+    if 7-lev+cnt < 4:
+        return
+
     if lev == 7:
         if cnt >= 4:
             q_tuple = tuple(sorted(q, key=lambda t: (t[0], t[1])))
