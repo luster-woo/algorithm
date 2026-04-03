@@ -1,48 +1,69 @@
-import heapq
 import sys
-input = sys.stdin.readline
 import heapq
+input = sys.stdin.readline
 
-def dij(start):
-    dist = [[10**9, 0] for _ in range(n+1)]
-    dist[start] = [0, 0]
+INF = 10**9
+
+def dijkstra(start):
+    dist = [INF] * (n+1)
+    dist[start] = 0
     pq = []
-    heapq.heappush(pq, (0, start, 0))
+    heapq.heappush(pq, (0, start))
+    
     while pq:
-        now_cost, now, now_idx = heapq.heappop(pq)
-        if dist[now][0] < now_cost:
+        now_cost, now = heapq.heappop(pq)
+        
+        if dist[now] < now_cost:
             continue
-        for next_node, weight, idx in graph[now]:
+        
+        for next_node, weight in graph[now]:
             new_cost = now_cost + weight
-            new_idx = now_idx + idx
-            if new_cost < dist[next_node][0]:
-                dist[next_node] = [new_cost, new_idx]
-                heapq.heappush(pq, (new_cost, next_node, new_idx))
-            elif new_cost == dist[next_node][0] and new_idx > dist[next_node][1]:
-                dist[next_node] = [new_cost, new_idx]
-                heapq.heappush(pq, (new_cost, next_node, new_idx))
+            
+            if new_cost < dist[next_node]:
+                dist[next_node] = new_cost
+                heapq.heappush(pq, (new_cost, next_node))
+    
     return dist
+
+
 tc = int(input())
 for _ in range(tc):
-    n,m,t = map(int,input().split())
+    n, m, t = map(int, input().split())
+    s, g, h = map(int, input().split())
+    
     graph = [[] for _ in range(n+1)]
-    s,g,h = map(int,input().split())
+    
     for _ in range(m):
-        v1,v2,cost = map(int,input().split())
-        if (v1 == g and v2 == h) or (v1 == h and v2 == g):
-            graph[v1].append((v2,cost,1))
-            graph[v2].append((v1,cost,1))
-        else:
-            graph[v1].append((v2,cost,0))
-            graph[v2].append((v1,cost,0))
-    end = []
-
-    for _ in range(t):
-        temp  = int(input())
-        end.append(temp)
-    end.sort()
-    dist = dij(s)
-    for x in end:
-        if dist[x][1]==1:
-            print(x,end=" ")
-    print()
+        a, b, d = map(int, input().split())
+        graph[a].append((b, d))
+        graph[b].append((a, d))
+    
+    targets = [int(input()) for _ in range(t)]
+    targets.sort()
+    
+    # 다익 3번
+    dist_s = dijkstra(s)
+    dist_g = dijkstra(g)
+    dist_h = dijkstra(h)
+    
+    # g-h 간선 길이 찾기
+    gh_dist = INF
+    for nxt, cost in graph[g]:
+        if nxt == h:
+            gh_dist = cost
+            break
+    
+    result = []
+    
+    for x in targets:
+        # s -> g -> h -> x
+        path1 = dist_s[g] + gh_dist + dist_h[x]
+        
+        # s -> h -> g -> x
+        path2 = dist_s[h] + gh_dist + dist_g[x]
+        
+        # 최단거리와 같으면 정답
+        if dist_s[x] == path1 or dist_s[x] == path2:
+            result.append(x)
+    
+    print(*result)
