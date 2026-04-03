@@ -5,10 +5,7 @@ import heapq
 
 def dij(start):
     dist = [[10**9, 0] for _ in range(n+1)]
-    if start != g and start != h:
-        dist[start] = [0, 0]
-    else:
-        dist[start] = [0, 1]
+    dist[start] = [0, 0]
     pq = []
     heapq.heappush(pq, (0, start, 0))
     while pq:
