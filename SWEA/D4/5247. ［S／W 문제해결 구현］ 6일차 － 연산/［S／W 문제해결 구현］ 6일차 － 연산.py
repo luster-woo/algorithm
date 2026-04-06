@@ -1,5 +1,4 @@
 from collections import deque
-
 num = int(input())
 for seq in range(1, num + 1):
     n, k = map(int, input().split())
