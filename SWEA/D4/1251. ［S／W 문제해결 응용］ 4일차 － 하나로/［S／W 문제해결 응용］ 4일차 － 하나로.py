@@ -1,4 +1,6 @@
 import heapq
+
+
 T = int(input())
  
 for tc in range(1,T+1):
@@ -10,11 +12,9 @@ for tc in range(1,T+1):
     visited = [0]*N
     min_edge = [float('inf')]*N
     min_edge[0] = 0
- 
-    hq = [(0, 0)]  # (cost, node)
+    hq = [(0, 0)] 
     total = 0
     count = 0
- 
     while hq:
         cost, node = heapq.heappop(hq)
  
