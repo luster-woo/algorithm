@@ -1,40 +1,39 @@
 import heapq
-
-def cnt(i, j):
-    return ((x[i]-x[j])**2 + (y[i]-y[j])**2) * e
-
-def prim():
-    visited = [0]*n
-    pq = [(0, 0)]
-    total_cost = 0
-
-    while pq:
-        w, idx = heapq.heappop(pq)
-        if visited[idx]:
+T = int(input())
+ 
+for tc in range(1,T+1):
+    N = int(input())
+    all_x = list(map(int, input().split()))
+    all_y = list(map(int, input().split()))
+    fee = float(input())
+ 
+    visited = [0]*N
+    min_edge = [float('inf')]*N
+    min_edge[0] = 0
+ 
+    hq = [(0, 0)]  # (cost, node)
+    total = 0
+    count = 0
+ 
+    while hq:
+        cost, node = heapq.heappop(hq)
+ 
+        if visited[node]:
             continue
-
-        visited[idx] = 1
-        total_cost += w
-
-        for nxt_idx, nxt_w in graph[idx]:
-            if not visited[nxt_idx]:
-                heapq.heappush(pq, (nxt_w, nxt_idx))
-
-    return total_cost
-
-num = int(input())
-for seq in range(1, num+1):
-    n = int(input())
-    x = list(map(int, input().split()))
-    y = list(map(int, input().split()))
-    e = float(input())
-
-    graph = [[] for _ in range(n)]
-
-    for i in range(n):
-        for j in range(i+1, n):
-            cost = cnt(i, j)
-            graph[i].append((j, cost))
-            graph[j].append((i, cost))
-
-    print(f'#{seq} {round(prim())}')
+ 
+        visited[node] = 1
+        count += 1
+        total += cost
+        if count == N:
+            break
+ 
+        for next_node in range(N):
+            if not visited[next_node]:
+                dist = (all_x[node]-all_x[next_node])**2 + (all_y[node]-all_y[next_node])**2
+ 
+                if dist < min_edge[next_node]:
+                    min_edge[next_node] = dist
+                    heapq.heappush(hq, (dist, next_node))
+                     
+ 
+    print(f"#{tc} {int(total*fee+0.5)}")
