@@ -11,7 +11,7 @@ def check():
         if cnt < k:
             return False
     return True
-
+ 
 def backtrack(depth,cnt):
     global result
     if cnt>=result:
@@ -19,7 +19,7 @@ def backtrack(depth,cnt):
     if check():
         result = cnt
         return
-
+ 
     if depth == d:
         return
     original = film[depth][:]
@@ -29,7 +29,7 @@ def backtrack(depth,cnt):
     film[depth] = [1]*w
     backtrack(depth+1, cnt+1)
     film[depth] = original
-
+ 
 tc = int(input())
 for seq in range(1,tc+1):
     d,w,k = map(int,input().split())
@@ -41,4 +41,4 @@ for seq in range(1,tc+1):
         print(f'#{seq} 0')
     else:
         backtrack(0,0)
-        print(f'#{seq} {result}')      
+        print(f'#{seq} {result}')
