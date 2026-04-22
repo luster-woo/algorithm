@@ -1,17 +1,24 @@
-num = int(input())
-def swimming(lev,total_cost):
+tc = int(input())
+def backtrack(lev,cnt):
     global min_val
-    if lev>=12:
-        min_val = min(min_val,total_cost)
+    if lev==12:
+        min_val = min(min_val,cnt)
+        return 
+    if cnt >= min_val:
         return
-    if min_val<=total_cost:
-        return
-    swimming(lev+1,total_cost+min(month[lev]*price[0],price[1]))
-    swimming(lev + 3, total_cost + price[2])
-    
-for seq in range(1,num+1):
+    if lev<9:
+        backtrack(lev+3,cnt+price[2])
+    else:
+        backtrack(12,cnt+price[2])
+    if month[lev]*price[0]>=price[1]:
+        backtrack(lev+1,cnt+price[1])
+    else:
+        backtrack(lev+1,cnt+price[0]*month[lev])
+
+
+for seq in range(1,tc+1):
     price = list(map(int,input().split()))
     month = list(map(int,input().split()))
     min_val = price[3]
-    swimming(0,0)
+    backtrack(0,0)
     print(f'#{seq} {min_val}')
