@@ -1,44 +1,36 @@
-# 🧩 Algorithm Study
+# algorithm
 
-[![BOJ](https://img.shields.io/badge/Baekjoon-241%20solved-0052CC?style=flat-square)](https://www.acmicpc.net)
-[![SWEA](https://img.shields.io/badge/SWEA-163%20solved-1428A0?style=flat-square)](https://swexpertacademy.com)
-[![Total](https://img.shields.io/badge/Total-404%20problems-brightgreen?style=flat-square)](https://github.com)
-[![Gold](https://img.shields.io/badge/BOJ%20최고-Gold-FFD700?style=flat-square)](https://www.acmicpc.net)
-[![Language](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org)
+백준(BOJ)과 SWEA에서 푼 알고리즘 문제를 모아 둔 저장소입니다. 문제를 제출하면 BaekjoonHub 확장이 자동으로 올려 줍니다. 언어는 Python입니다.
 
-백준(BOJ)과 SWEA에서 풀이한 알고리즘 문제를 기록하는 레포지토리입니다.  
-Bronze부터 시작해 Gold 난이도까지 꾸준히 범위를 넓혀왔습니다.
+## 풀이 현황
 
----
+모두 404문제입니다(2026년 7월 기준).
 
-## 📊 풀이 현황
-
-### 백준 (BOJ)
+백준 241문제
 
 | 난이도 | 문제 수 |
-|:---:|:---:|
-| 🥇 Gold | 48 |
-| 🥈 Silver | 59 |
-| 🥉 Bronze | 133 |
-| **합계** | **241** |
+|---|---|
+| Gold | 48 |
+| Silver | 59 |
+| Bronze | 133 |
+| Unrated | 1 |
 
-### SWEA
+SWEA 163문제
 
 | 난이도 | 문제 수 |
-|:---:|:---:|
+|---|---|
 | D1 | 19 |
 | D2 | 49 |
 | D3 | 52 |
 | D4 | 27 |
-| D5 + D6 | 4 |
-| **합계** | **163** |
+| D5 | 2 |
+| D6 | 2 |
+| Unrated | 12 |
 
----
-
-## 🧠 다룬 알고리즘
+## 다룬 알고리즘
 
 | 분류 | 대표 문제 |
-|:---|:---|
+|---|---|
 | 그래프 탐색 (BFS/DFS) | 토마토, 다리 만들기, 인구 이동, 보물섬, 벽 부수고 이동하기 |
 | 최단 경로 (Dijkstra) | 최단경로, 최소비용 구하기, 서강그라운드, 파티, 미확인 도착지 |
 | 최소 스패닝 트리 (MST) | 최소 스패닝 트리, 도시 분할 계획, 네트워크 연결, 전력난 |
@@ -50,20 +42,20 @@ Bronze부터 시작해 Gold 난이도까지 꾸준히 범위를 넓혀왔습니�
 | 트리 | 트리의 지름 |
 | 스택 / 문자열 | 문자열 폭발, 팰린드롬 |
 
----
-
-## 📂 폴더 구조
+## 폴더 구조
 
 ```
 algorithm/
 ├── 백준/
 │   ├── Bronze/
 │   │   └── 문제번호. 문제명/
-│   │       └── 문제번호.py
+│   │       ├── 문제명.py
+│   │       └── README.md
 │   ├── Silver/
 │   └── Gold/
 └── SWEA/
-    ├── D1/ ~ D6/
-    │   └── 문제번호. 문제명/
-    │       └── 문제번호.py
+    └── D1/ ~ D6/
+        └── 문제번호. 문제명/
 ```
+
+같은 기간 SSAFY 구미 알고리즘 스터디에 제출한 풀이는 [ssafy_gumi_study](https://github.com/luster-woo/ssafy_gumi_study)의 `yunwoo` 폴더에도 있습니다.
